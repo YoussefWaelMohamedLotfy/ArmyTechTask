@@ -4,9 +4,9 @@ using ArmyTechTask.Infrastructure.Data;
 
 namespace ArmyTechTask.Infrastructure.Repositories;
 
-public class InvoiceRepository : GenericRepository<Invoice>, IInvoiceRepository
+public class InvoiceHeaderRepository : GenericRepository<InvoiceHeader>, IInvoiceHeaderRepository
 {
-    public InvoiceRepository(AppDbContext context) : base(context)
+    public InvoiceHeaderRepository(AppDbContext context) : base(context)
     {
     }
 }

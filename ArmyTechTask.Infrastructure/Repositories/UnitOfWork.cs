@@ -13,10 +13,14 @@ public class UnitOfWork : IUnitOfWork
 
         Cashiers = new CashierRepository(_context);
         Invoices = new InvoiceRepository(_context);
+        InvoiceHeaders = new InvoiceHeaderRepository(_context);
+        InvoiceDetails = new InvoiceDetailRepository(_context);
     }
 
     public ICashierRepository Cashiers { get; private set; }
     public IInvoiceRepository Invoices { get; private set; }
+    public IInvoiceHeaderRepository InvoiceHeaders { get; private set; }
+    public IInvoiceDetailRepository InvoiceDetails { get; private set; }
 
     public void Dispose()
     {
