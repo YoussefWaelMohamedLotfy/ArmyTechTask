@@ -12,9 +12,11 @@ public class UnitOfWork : IUnitOfWork
         _context = context ?? throw new ArgumentNullException(nameof(context));
 
         Cashiers = new CashierRepository(_context);
+        Invoices = new InvoiceRepository(_context);
     }
 
     public ICashierRepository Cashiers { get; private set; }
+    public IInvoiceRepository Invoices { get; private set; }
 
     public void Dispose()
     {

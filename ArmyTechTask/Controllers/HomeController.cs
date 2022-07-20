@@ -1,32 +1,35 @@
-﻿using ArmyTechTask.Models;
+﻿using ArmyTechTask.Domain.Repositories;
+using ArmyTechTask.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ArmyTechTask.Controllers
+namespace ArmyTechTask.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private IUnitOfWork _unitOfWork;
+
+    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
     {
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
+        _unitOfWork = unitOfWork;
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    public async Task<IActionResult> Index()
+    {
+        var res = await _unitOfWork.Invoices.GetAllAsync();
+        return View();
+    }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
