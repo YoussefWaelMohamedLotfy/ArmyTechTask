@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyTechTask", "ArmyTechTask\ArmyTechTask.csproj", "{3B59363F-4550-4FC5-9CBD-E5D076DE1E1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyTechTask.Domain", "ArmyTechTask.Domain\ArmyTechTask.Domain.csproj", "{1BD828C1-2AEC-4695-A63A-EB9A262CAD2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyTechTask.Infrastructure", "ArmyTechTask.Infrastructure\ArmyTechTask.Infrastructure.csproj", "{3E944073-9285-4695-9AFF-1AE92B7B9DC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{3B59363F-4550-4FC5-9CBD-E5D076DE1E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B59363F-4550-4FC5-9CBD-E5D076DE1E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B59363F-4550-4FC5-9CBD-E5D076DE1E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD828C1-2AEC-4695-A63A-EB9A262CAD2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD828C1-2AEC-4695-A63A-EB9A262CAD2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD828C1-2AEC-4695-A63A-EB9A262CAD2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD828C1-2AEC-4695-A63A-EB9A262CAD2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E944073-9285-4695-9AFF-1AE92B7B9DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E944073-9285-4695-9AFF-1AE92B7B9DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E944073-9285-4695-9AFF-1AE92B7B9DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E944073-9285-4695-9AFF-1AE92B7B9DC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
