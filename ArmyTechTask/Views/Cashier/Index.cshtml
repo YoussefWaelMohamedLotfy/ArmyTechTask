@@ -1,0 +1,99 @@
+﻿@model CashierIndexVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="p-1">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Cashiers</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Cashier
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-bordered table-striped text-center" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Cashier Name
+                </th>
+                <th>
+                    Branch ID
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cashier in Model.Cashiers)
+            {
+                <tr>
+                    <td width="20%">
+                        @cashier.Id
+                    </td>
+                    <td width="30%">
+                        @cashier.CashierName
+                    </td>
+                    <td width="30%">
+                        @cashier.BranchId
+                    </td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@cashier.Id" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <button class="btn btn-danger" data-bs-id="@cashier.Id" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deleting Cashier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalBodyContent"></p>
+                </div>
+                <div class="modal-footer">
+                    <form id="modalForm" method="post" asp-action="Delete">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const exampleModal = document.getElementById('deleteModal');
+        const modalForm = document.getElementById('modalForm');
+
+        exampleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            const data = button.getAttribute('data-bs-id');
+            modalForm.setAttribute('action', '/Cashier/Delete/' + data);
+
+            const modalBodyContent = exampleModal.querySelector('#modalBodyContent');
+            modalBodyContent.innerHTML = `Are you sure to delete Cashier of ID ${data}? This action cannot be revoked.`;
+        });
+    </script>
+}
