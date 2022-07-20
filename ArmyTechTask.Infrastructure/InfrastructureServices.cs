@@ -10,6 +10,6 @@ public static class InfrastructureServices
     public static void AddInfrastructureServices(this IServiceCollection services)
     {
         services.AddDbContext<AppDbContext>();
-        services.AddScoped<ICashierRepository, CashierRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }
