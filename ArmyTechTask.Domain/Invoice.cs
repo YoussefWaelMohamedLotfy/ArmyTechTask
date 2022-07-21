@@ -8,5 +8,4 @@ public partial class Invoice
     public int? CashierId { get; set; }
     public int BranchId { get; set; }
     public double? InvoiceTotal { get; set; }
-
 }

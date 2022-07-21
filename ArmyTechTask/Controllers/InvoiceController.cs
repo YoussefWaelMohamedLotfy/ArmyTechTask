@@ -13,6 +13,7 @@ public class InvoiceController : Controller
         _unit = unit ?? throw new ArgumentNullException(nameof(unit));
     }
 
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         InvoiceIndexVM viewModel = new()
@@ -21,5 +22,27 @@ public class InvoiceController : Controller
         };
 
         return View(viewModel);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> DetailsEdit(long id)
+    {
+        InvoiceDetailsEditVM viewModel = new()
+        {
+            Invoice = await _unit.InvoiceHeaders.GetInvoiceHeadersWithRelations(id),
+            BranchSelectList = _unit.Invoices.GetAllBranchesDropdownList(),
+            CashierSelectList = _unit.Invoices.GetAllCashiersDropdownList()
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DetailsEdit(InvoiceDetailsEditVM viewModel)
+    {
+        _unit.InvoiceHeaders.Update(viewModel.Invoice);
+        await _unit.SaveAsync();
+
+        return RedirectToAction(nameof(Index));
     }
 }
