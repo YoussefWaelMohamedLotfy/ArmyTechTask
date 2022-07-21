@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string IsViewActive(string controllerActionName) 
+    => $"{ViewContext.RouteData.Values["controller"]!}-{ViewContext.RouteData.Values["action"]!}" == controllerActionName 
+        ? "active" : string.Empty;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,13 +28,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @IsViewActive("Home-Index")" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @IsViewActive("Home-Privacy")" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Cashier" asp-action="Index">Cashiers</a>
+                            <a class="nav-link @IsViewActive("Cashier-Index")" asp-controller="Cashier" asp-action="Index">Cashiers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @IsViewActive("Invoice-Index")" asp-controller="Invoice" asp-action="Index">Invoices</a>
                         </li>
                     </ul>
                 </div>
