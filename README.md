@@ -11,7 +11,7 @@ In order to run the project, .NET 6.0.7 [(SDK 6.0.302)](https://dotnet.microsoft
 
 The database used for development is `SQL Server LocalDB Instance` that comes with VS Community. So the connection string should be changed to your instance's server address. i.e. Change the `(localdb)\MSSQLLocalDB` in the [AppDbContext File](https://github.com/YoussefWaelMohamedLotfy/ArmyTechTask/blob/main/ArmyTechTask.Infrastructure/Data/AppDbContext.cs#L24) to your instance.
 
-For scaffolding your database, use the following command in the Package Manager Console:
+(NOT REQUIRED, This is FYI)For scaffolding your database, use the following command in the Package Manager Console:
 
 ```
 Scaffold-DbContext -Provider "Microsoft.EntityFrameworkCore.SqlServer" -Connection "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ArmyTechTask"
