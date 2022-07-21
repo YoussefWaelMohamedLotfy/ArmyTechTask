@@ -9,12 +9,12 @@
             <h2 class="text-primary">Cashiers</h2>
         </div>
         <div class="col-6 text-end">
-            <a class="btn btn-primary">
+            <a class="btn btn-primary" asp-action="Upsert">
                 <i class="bi bi-plus-circle"></i> &nbsp; Create New Cashier
             </a>
         </div>
     </div>
-    <br /><br />
+    <br />
     <table class="table table-bordered table-striped text-center" style="width:100%">
         <thead>
             <tr>
@@ -23,6 +23,9 @@
                 </th>
                 <th>
                     Cashier Name
+                </th>
+                <th>
+                    Branch Name
                 </th>
                 <th>
                     Branch ID
@@ -36,18 +39,21 @@
             @foreach (var cashier in Model.Cashiers)
             {
                 <tr>
-                    <td width="20%">
+                    <td width="10%">
                         @cashier.Id
                     </td>
                     <td width="30%">
                         @cashier.CashierName
                     </td>
                     <td width="30%">
+                        @cashier.Branch.BranchName
+                    </td>
+                    <td width="10%">
                         @cashier.BranchId
                     </td>
                     <td>
                         <div class="w-100 btn-group" role="group">
-                            <a asp-action="Edit" asp-route-id="@cashier.Id" class="btn btn-primary">
+                            <a asp-action="Upsert" asp-route-id="@cashier.Id" class="btn btn-primary">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
                             <button class="btn btn-danger" data-bs-id="@cashier.Id" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -90,7 +96,7 @@
         exampleModal.addEventListener('show.bs.modal', event => {
             const button = event.relatedTarget;
             const data = button.getAttribute('data-bs-id');
-            modalForm.setAttribute('action', '/Cashier/Delete/' + data);
+            modalForm.setAttribute('action', '/Cashier/DeleteCashier/' + data);
 
             const modalBodyContent = exampleModal.querySelector('#modalBodyContent');
             modalBodyContent.innerHTML = `Are you sure to delete Cashier of ID ${data}? This action cannot be revoked.`;

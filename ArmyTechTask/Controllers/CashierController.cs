@@ -18,26 +18,57 @@ namespace ArmyTechTask.Controllers
         {
             CashierIndexVM viewModel = new()
             {
-                Cashiers = await _unit.Cashiers.GetAllAsync()
+                Cashiers = await _unit.Cashiers.GetAllCashiersWithBranch()
             };
 
             return View(viewModel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(long id)
+        public async Task<IActionResult> Upsert(long? id)
         {
-            CashierEditVM viewModel = new()
+            CashierUpsertVM viewModel = new()
             {
-                Cashiers = await _unit.Cashiers.GetCashierByIdAsync(id)
+                BranchSelectList = _unit.Cashiers.GetAllBranchesDropdownList()
             };
+
+            if (id is null)
+            {
+                // Create
+                viewModel.Cashier = new();
+            }
+            else
+            {
+                // Update
+                viewModel.Cashier = await _unit.Cashiers.GetCashierByIdAsync(id.Value);
+
+                if (viewModel.Cashier is null)
+                    return NotFound();
+            }
 
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> Upsert(CashierUpsertVM viewModel)
+        {
+            if (viewModel.Cashier.Id == 0)
+            {
+                await _unit.Cashiers.AddAsync(viewModel.Cashier);
+            }
+            else
+            {
+                _unit.Cashiers.Update(viewModel.Cashier);
+            }
+
+            await _unit.SaveAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCashier(long id)
         {
             var cashier = await _unit.Cashiers.GetCashierByIdAsync(id);
 
