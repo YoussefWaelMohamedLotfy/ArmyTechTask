@@ -21,19 +21,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
     public void Delete(T entity)
-    {
-        _db.Remove(entity);
-    }
+        => _db.Remove(entity);
 
     public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default!)
-    {
-        return await _db.ToListAsync();
-    }
+        => await _db.ToListAsync(cancellationToken);
 
     public async Task<T> GetByIdAsync(long id, CancellationToken cancellationToken = default!)
-    {
-        return (await _db.FindAsync(id, cancellationToken))!;
-    }
+        => (await _db.FindAsync(new object[] { id }, cancellationToken))!;
 
     public T Update(T entity)
     {
