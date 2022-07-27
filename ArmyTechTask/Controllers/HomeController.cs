@@ -1,5 +1,4 @@
-﻿using ArmyTechTask.Domain.Repositories;
-using ArmyTechTask.Models;
+﻿using ArmyTechTask.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,17 +7,14 @@ namespace ArmyTechTask.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private IUnitOfWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        _unitOfWork = unitOfWork;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        var res = await _unitOfWork.Invoices.GetAllAsync();
         return View();
     }
 
